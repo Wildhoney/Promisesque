@@ -2,7 +2,9 @@ const isPromise = x => x instanceof Promise;
 
 const hasPromise = xs => xs.some(isPromise);
 
-export const create = (value, ok, error) => {
+const identity = x => x;
+
+export const create = (value, ok = identity, error = identity) => {
     if (isPromise(value)) return value.then(ok).catch(error);
 
     try {
@@ -12,7 +14,7 @@ export const create = (value, ok, error) => {
     }
 };
 
-export const all = (values, ok, error) => {
+export const all = (values, ok = identity, error = identity) => {
     if (hasPromise(values))
         return Promise.all(values)
             .then(ok)
@@ -25,7 +27,7 @@ export const all = (values, ok, error) => {
     }
 };
 
-export const race = (values, ok, error) => {
+export const race = (values, ok = identity, error = identity) => {
     if (hasPromise(values))
         return Promise.race(values)
             .then(ok)
