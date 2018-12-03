@@ -1,6 +1,6 @@
 {
   "name": "promisesque",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lazily create a promise only when async values are used, otherwise sync all the way down.",
   "main": "src/index.js",
   "repository": "git@github.com:Wildhoney/Promisesque.git",
