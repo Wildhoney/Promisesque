@@ -1,0 +1,25 @@
+{
+  "name": "promisesque",
+  "version": "0.1.0",
+  "description": "Lazily create a promise only when async values are used, otherwise sync all the way down.",
+  "main": "src/index.js",
+  "repository": "git@github.com:Wildhoney/Promisesque.git",
+  "author": "Adam Timberlake <adam.timberlake@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "ava",
+    "format": "prettier --write 'src/*.js'"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "esm": "^3.0.84",
+    "prettier": "^1.15.3",
+    "sinon": "^7.1.1"
+  },
+  "ava": {
+    "failFast": true,
+    "require": [
+      "esm"
+    ]
+  }
+}
