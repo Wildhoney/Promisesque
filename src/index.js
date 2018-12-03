@@ -2,40 +2,35 @@ const isPromise = x => x instanceof Promise;
 
 const hasPromise = xs => xs.some(isPromise);
 
-const identity = x => x;
-
-export const create = (value, ok = identity, error = identity) => {
-    if (isPromise(value)) return value.then(ok).catch(error);
-
-    try {
-        return ok(value);
-    } catch (err) {
-        return error(err);
+const handleValue = (value, ok, error) => {
+    if (error) {
+        try {
+            return ok(value);
+        } catch (err) {
+            return error(err);
+        }
     }
+
+    return ok(value);
 };
 
-export const all = (values, ok = identity, error = identity) => {
+export const create = (value, ok, error) => {
+    if (isPromise(value)) return value.then(ok).catch(error);
+    return handleValue(value, ok, error);
+};
+
+export const all = (values, ok, error) => {
     if (hasPromise(values))
         return Promise.all(values)
             .then(ok)
             .catch(error);
-
-    try {
-        return ok(values);
-    } catch (err) {
-        return error(err);
-    }
+    return handleValue(values, ok, error);
 };
 
-export const race = (values, ok = identity, error = identity) => {
+export const race = (values, ok, error) => {
     if (hasPromise(values))
         return Promise.race(values)
             .then(ok)
             .catch(error);
-
-    try {
-        return ok(values[0]);
-    } catch (err) {
-        return error(err);
-    }
+    return handleValue(values[0], ok, error);
 };
