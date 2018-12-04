@@ -11,8 +11,8 @@ test('It should be able to handle a promise;', async t => {
         t.is(value, 'Adam');
         return value;
     });
-    const a = prq.create('Adam', ok);
-    const b = prq.create(Promise.resolve('Adam'), ok);
+    const a = prq.get('Adam', ok);
+    const b = prq.get(Promise.resolve('Adam'), ok);
     t.false(a instanceof Promise);
     t.true(b instanceof Promise);
     t.is(a, 'Adam');
@@ -53,8 +53,8 @@ test('It should be able to catch errors;', async t => {
         t.deepEqual(err, new Error('bah...'));
         return err;
     });
-    const a = prq.create('Adam', throwError, error);
-    const b = prq.create(Promise.resolve('Adam'), throwError, error);
+    const a = prq.get('Adam', throwError, error);
+    const b = prq.get(Promise.resolve('Adam'), throwError, error);
     t.false(a instanceof Promise);
     t.true(b instanceof Promise);
     t.deepEqual(a, new Error('bah...'));
@@ -69,7 +69,7 @@ test('It should be able to chain promises;', t => {
         r = 'Maria'; // Second time around the "promise" will be resolved as "Maria".
         return r;
     });
-    const a = prq.create(prq.create('Adam', ok), ok);
+    const a = prq.get(prq.get('Adam', ok), ok);
     t.false(a instanceof Promise);
     t.is(a, 'Maria');
     t.is(ok.callCount, 2);

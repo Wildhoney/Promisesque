@@ -19,7 +19,7 @@ Although [generally a bad idea](https://medium.com/@bluepnume/intentionally-unle
 ```javascript
 import * as prq from 'promisesque';
 
-prq.create(value, ok, error);
+prq.get(value, ok, error);
 prq.all(value, ok, error);
 prq.race(value, ok, error);
 ```

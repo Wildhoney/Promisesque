@@ -14,7 +14,7 @@ const handleValue = (value, ok, error) => {
     return ok(value);
 };
 
-export const create = (value, ok, error) => {
+export const get = (value, ok, error) => {
     if (isPromise(value)) return value.then(ok).catch(error);
     return handleValue(value, ok, error);
 };
